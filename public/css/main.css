@@ -1,0 +1,95 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  background-image: url("http://www.electricgnome.com/codiad/workspace/Kappa/image/polonez_car.png");
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.optional {
+  display: none;
+}
+
+.table_display {
+  background-color: #ffebee;
+}
+
+.padding-0 {
+  padding: 0 !important;
+}
+
+
+.starRating:not(old){
+  display        : inline-block;
+  width          : 7em;
+  height         : 1.3em;
+  overflow       : hidden;
+  vertical-align : bottom;
+}
+
+.starRating:not(old) > input{
+  margin-right :-100%;
+  opacity      : 0;
+}
+
+.starRating:not(old) > label{
+  display         : block;
+  float           :right;
+  position        : relative;
+  background      :url('../img/star_border.svg');
+  /* content:'star_border'; */
+  background-size : contain;
+ 
+}
+
+.starRating:not(old) >label:before{
+  content         : '';
+  display         : block;
+  width           : 1.5em;
+  height          : 1.5em;
+  background      : url('../img/star.svg'); 
+  /* content:'star'; */
+  background-size : contain;
+  opacity         : 0;
+  transition      : opacity 0.2s linear;
+}
+
+.starRating:not(old) > label:hover:before,
+.starRating:not(old) > label:hover ~ label:before,
+.starRating:not(:hover) > :checked ~ label:before{
+  opacity : 1;
+
+}
+
+
+
+/* label color */
+.input-field label {
+  color: #000;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #000;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* valid color */
+.input-field input[type=text].valid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+  border-bottom: 1px solid #000;
+  box-shadow: 0 1px 0 0 #000;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+  color: #000;
+}

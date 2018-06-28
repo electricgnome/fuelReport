@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %}
+  <title>{% block title %}{% endblock %} -Kappa Insurance </title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="shortcut icon" href="img/favicon.ico" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> {% endblock %}
+</head>
+
+<body>
+  <header id="header">{% block header %}
+        <div class="navbar-fixed">
+          <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo truncate">Kappa Insurance</a>
+              <a href="#" data-target="slide-out" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a href="/">Quote Request</a>
+                </li>
+                <li>
+                  <a href="/carriers">Our Carriers</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact Us</a>
+                </li>
+                <li>
+                  <a href="/about">About Us</a>
+                </li>
+                
+              </ul>
+            </div>
+          </nav>
+    
+          
+        </div>
+        <ul class="sidenav" id="slide-out">
+          <li>
+            <a href="/">Quote Request</a>
+          </li>
+          <li>
+            <a href="/carriers">Our Carriers</a>
+          </li>
+          <li>
+            <a href="/contact">Contact Us</a>
+          </li>
+          <li>
+            <a href="/about">About Us</a>
+          </li>
+        {% endblock %}
+    </header>
+  <main id="content">{% block content %} {% endblock %}</main>
+
+
+  {% block footer %}
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h6>Chat box!</h6>
+      <pre id="chat-box"></pre>
+      <input id="message" onkeypress="send_message(event)">
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
+      </div>
+  </div>
+
+ <!--   {# <div class="fixed-action-btn">
+    <a href="#modal2" class="btn-floating btn-large waves-effect waves-light modal-trigger red">
+      <i class="material-icons">chat</i>
+    </a>
+  </div>  #}-->
+  <footer class="page-footer hide-on-small-only">
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+    <!-- Optional JavaScript -->
+    <script src="/socket-io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+     {% endblock %}
+    </div>
+  </footer>
+
+
+
+
+</body>
+
+</html>

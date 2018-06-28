@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block title %}Quote Request{% endblock %} {% block content %}
+
+<!-- <div class="container z-depth-5 table_display" style="margin-top:80px;"> -->
+
+<div class="row" style="padding-top:10%">
+    <div class="col 10 table_display offset-s2">
+        <table class="highlight responsive-table centered">
+            <thead>
+                <tr>
+                    <h5 class="center-align">May Payments</h5>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Day</th>
+                    <th>Inception</th>
+                    <th>Paid</th>
+                    <th>Premium</th>
+                    <th>Task / Comment</th>
+                    <th>Carrier</th>
+                    <th>Policy</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for q in query %}
+                <tr class="hoverable">
+                    {% for i in q %}
+                    <td>{{ i }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--  </div> -->
+
+
+    {% endblock %}
