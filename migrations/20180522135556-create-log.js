@@ -26,7 +26,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.DECIMAL(5,2)
+        type: Sequelize.DECIMAL(6,2)
       },
       location: {
         type: Sequelize.STRING

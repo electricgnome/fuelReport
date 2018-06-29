@@ -2,9 +2,9 @@
 module.exports = (sequelize, DataTypes) => {
   var log = sequelize.define('log', {
     miles: DataTypes.INTEGER,
-    gallons: DataTypes.INTEGER,
+    gallons: DataTypes.DECIMAL(5,2),
     fuel_type: DataTypes.STRING,
-    amount: DataTypes.DECIMAL(3,2),
+    amount: DataTypes.DECIMAL(6,2),
     date: DataTypes.DATE,
     location: DataTypes.STRING
   }, {});
