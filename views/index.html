@@ -3,35 +3,44 @@
 <!-- <div class="container z-depth-5 table_display" style="margin-top:80px;"> -->
 
 <div class="row" style="padding-top:10%">
-    <div class="col 10 table_display offset-s2">
-        <table class="highlight responsive-table centered">
-            <thead>
-                <tr>
-                    <h5 class="center-align">May Payments</h5>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Day</th>
-                    <th>Inception</th>
-                    <th>Paid</th>
-                    <th>Premium</th>
-                    <th>Task / Comment</th>
-                    <th>Carrier</th>
-                    <th>Policy</th>
-                </tr>
-            </thead>
+  <div class="col 10 table_display offset-s2">
 
-            <tbody>
-                {% for q in query %}
-                <tr class="hoverable">
-                    {% for i in q %}
-                    <td>{{ i }}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <!--  </div> -->
+    <table class="highlight responsive-table centered">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>location</th>
+          <th>user</th>
+          <th>ID</th>
+          <th>miles</th>
+          <th>gallons</th>
+          <th>price</th>
+          <th>fuel</th>
+          <th>Wex</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in logs %}
+        <tr>
+          <td>{{item.createdAt.toDateString()}}</td>
+          <td>{{item.location}}</td>
+          <td>{{item.user.firstName}}</td>
+          <td>{{item.user.employee}}</td>
+          <td>{{item.miles}}</td>
+          <td>{{item.amount}}</td>
+          <td>{{item.gallons}}</td>
+          <td>{{item.fuel_type}}</td>
+          <td>{{item.user.wex}}</td>
+        </tr>
+
+        {% endfor %}
 
 
-    {% endblock %}
+      </tbody>
+    </table>
+
+  </div>
+  <!--  </div> -->
+
+
+  {% endblock %}

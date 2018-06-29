@@ -20,13 +20,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       gallons: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL(5,2)
       },
       fuel_type: {
         type: Sequelize.STRING
       },
       amount: {
-        type: Sequelize.DECIMAL(3,2)
+        type: Sequelize.DECIMAL(5,2)
       },
       location: {
         type: Sequelize.STRING

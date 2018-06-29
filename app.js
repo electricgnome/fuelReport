@@ -133,7 +133,14 @@ app.get("/logout", function(request, response) {
 //Todo APPl
 
 app.get("/", function(request, response) {
-  response.render("index.html");
+  db.log.findAll({ include: [{ model: db.user }] }).then(logs => {
+    db.user.findAll().then(users=>{
+      console.log("current user: " + request.session.user )
+      response.render("index.html", { logs, users});
+    });
+    // response.json({tasks: tasks})
+  });
+ 
 });
 
 app.get("/report", function (request, response) {
@@ -153,7 +160,7 @@ app.post("/success", function (request, response, next) {
 app.get("/log", function(request, response) {
   db.log.findAll({ include: [{ model: db.user }] }).then(logs => {
     db.user.findAll().then(users=>{
-      console.log("current user: " + request.session.user )
+      console.log("current user ID: " + request.session.user )
       response.render("log_fuel.html", { logs, users});
     });
     // response.json({tasks: tasks})
@@ -170,13 +177,14 @@ app.post("/log", function(request, response, next) {
   ) {
     db.log
       .create({
-        userId:request.session.user,
+        userId:request.body.user_id,
         miles: request.body.miles,
         gallons:request.body.gallons,
         fuel_type:request.body.fuel_type,
         amount:request.body.amount,
-        // due: due_date,
-        userId: request.body.agent,
+        location:'loc',
+        due: due_date
+        
         
       })
       .then(log => {
