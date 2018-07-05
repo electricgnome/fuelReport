@@ -6,7 +6,7 @@ jsonfile = "/src/file.json";
 const Promise = require("bluebird");
 session = require("express-session");
 redis = require("redis"),
-client = redis.createClient(process.env.REDIS_URL);
+// client = redis.createClient(process.env.REDIS_URL);
 RedisStore = require("connect-redis")(session);
 pbkdf2 = require("pbkdf2");
 passhelper = require('pbkdf2-helpers');
@@ -27,11 +27,11 @@ const io = require("socket.io")(http);
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-
+var redis_options = {url: process.env.REDIS_URL || 'redis://localhost:6379'}
 var hour = 3600000;
 app.use(
   session({
-    store: new RedisStore(),
+    store: new RedisStore(redis_options),
     secret: process.env.SECRET_KEY || "dev",
     resave: true,
     saveUninitialized: false,
@@ -41,7 +41,7 @@ app.use(
 const sharedsession = require("express-socket.io-session");
 
 io.use(sharedsession(session({
-  store: new RedisStore(),
+  store: new RedisStore(redis_options),
   secret: process.env.SECRET_KEY || "dev",
   resave: true,
   saveUninitialized: false,
