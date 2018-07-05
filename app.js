@@ -85,12 +85,13 @@ app.post("/register", function(request, response) {
   if (passhelper.matches(password2, passcrypt)){
     console.log("Matching passwords!!")
     db.user.create({
-      firstName:request.body.fname,
-      lastName:request.body.lname,
-      email:request.body.email,
+      firstName:request.body.fname.toUpperCase(),
+      lastName:request.body.lname.toUpperCase(),
+      email:request.body.email.toUpperCase(),
       phone:request.body.phone,
-      employee:request.body.empno,
-      wex:request.body.wex,
+      employee_no:request.body.employee_no,
+      card_number:request.body.card_no,
+      department:request.body.department.toUpperCase(),
       passcrypt:passcrypt
     }).then(user=>{
       response.redirect("/login");
@@ -109,15 +110,16 @@ app.get("/login", function(request, response) {
   response.render("login.html");
 });
 
-app.post("/login", function(request, response) {
+app.post("/login", function(request, response, next) {
   var username = request.body.username;
   var password = request.body.password;
-  db.user.findOne({where:{employee:username}}).then( user =>{
-    if (username == user.employee && passhelper.matches(password, user.passcrypt)) {
+  db.user.findOne({where:{employee_no:username}}).then( user =>{
+    if (username == user.employee_no && passhelper.matches(password, user.passcrypt)) {
       request.session.user = username;
       console.log("Welcome!");
       response.render("index.html", {username});
     } else {
+      next();
       console.log("failed!");
       response.redirect("/login");
     }
@@ -158,7 +160,7 @@ app.post("/success", function (request, response, next) {
 
 
 app.get("/log", function(request, response) {
-  db.user.findAll({where:{employee:request.session.user}}).then(users => {
+  db.user.findAll({where:{employee_no:request.session.user}}).then(users => {
     db.log.findAll({ include: [{ model: db.user }], where:{ userId:users[0].id  } }).then(logs=>{
       console.log("current user ID: " + request.session.user )
       response.render("log_fuel.html", { logs, users});
@@ -178,10 +180,13 @@ app.post("/log", function(request, response, next) {
     db.log
       .create({
         userId:request.body.user_id,
-        miles: request.body.miles,
-        gallons:request.body.gallons,
-        fuel_type:request.body.fuel_type,
-        amount:request.body.amount,
+        odometer:request.body.odometer,
+        units:request.body.units,
+        product:request.body.product,
+        cost:request.body.cost,
+        vehicle_id:request.body.vehicle_id.toUpperCase(),
+        merchant:request.body.merchant.toUpperCase(),
+        notes:request.body.notes.toUpperCase(),
         location:'loc',
         due: due_date
         

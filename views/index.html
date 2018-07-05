@@ -8,29 +8,34 @@
     <table class="highlight responsive-table centered">
       <thead>
         <tr>
-          <th>Date</th>
-          <th>location</th>
-          <th>user</th>
-          <th>ID</th>
-          <th>miles</th>
-          <th>gallons</th>
-          <th>price</th>
-          <th>fuel</th>
-          <th>Wex</th>
+          <th>Card No.</th>
+          <th>Department</th>
+          <th>Customer Vehicle ID</th>
+          <th>Driver</th>
+          <th>Transaction Date</th>
+          <th>Location</th>          
+          <th>Merchant</th>
+          <th>Current Odometer</th>
+          <th>Product</th>
+          <th>Units</th>
+          <th>Fuel Cost</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         {% for item in logs %}
         <tr>
+          <td>{{item.user.card_number}}</td>
+          <td>{{item.user.department}}</td>
+          <td>{{item.vehicle_id}}</td>
+          <td>{{item.user.firstName}} {{item.user.lastName}}</td>
           <td>{{item.createdAt.toDateString()}}</td>
           <td>{{item.location}}</td>
-          <td>{{item.user.firstName}}</td>
-          <td>{{item.user.employee}}</td>
-          <td>{{item.miles}}</td>
-          <td>{{item.amount}}</td>
-          <td>{{item.gallons}}</td>
-          <td>{{item.fuel_type}}</td>
-          <td>{{item.user.wex}}</td>
+          <td>{{item.merchant}}</td>
+          <td>{{item.odometer}}</td>
+          <td>{{item.product}}</td>
+          <td>{{item.units}}</td>
+          <td>{{item.cost}}</td>
         </tr>
 
         {% endfor %}

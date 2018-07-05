@@ -1,10 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var log = sequelize.define('log', {
-    miles: DataTypes.INTEGER,
-    gallons: DataTypes.DECIMAL(5,2),
-    fuel_type: DataTypes.STRING,
-    amount: DataTypes.DECIMAL(6,2),
+    odometer: DataTypes.INTEGER,
+    units: DataTypes.DECIMAL(5,2),
+    product: DataTypes.STRING,
+    cost: DataTypes.DECIMAL(6,2),
+    vehicle_id: DataTypes.STRING,
+    merchant: DataTypes.STRING,
+    notes: DataTypes.TEXT,
     date: DataTypes.DATE,
     location: DataTypes.STRING
   }, {});

@@ -5,19 +5,32 @@
     <div class="row">
       <br>
     </div>
+
     <div class="row">
-
-
       <div class="col s6 m4 offset-m2 input-field inline">
-        <input id="miles" type="number" name="miles" class="validate">
-        <label for="miles">miles: </label>
+        <input id="vehicle_id" type="text" name="vehicle_id" class="validate">
+        <label for="vehicle_id">Vehicle ID: </label>
+      </div>
+
+      <div class="col s6 m4 input-field inline">
+        <input id="odometer" type="number" name="odometer" class="validate">
+        <label for="odometer">Odometer: </label>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col s6 m4 offset-m2 input-field inline">
+        <input id="merchant" type="text" name="merchant" class="validate">
+        <label for="merchant">Merchant: </label>
       </div>
 
 
+
       <div class="col s6 m4 input-field ">
-        <select name="fuel_type">
-          <option value='gasoline' selected>Gasoline</option>
-          <option value='diesel'>Diesel</option>
+        <select name="product">
+          <option value='UNL' selected>Gasoline</option>
+          <option value='DSL'>Diesel</option>
 
         </select>
 
@@ -28,21 +41,31 @@
     <div class="row">
 
       <div class="col s6 m4 offset-m2 input-field inline">
-        <input id="gallons" type="number" step="0.01" name="gallons" class="validate">
-        <label for="gallons">Gallons: </label>
+        <input id="units" type="number" step="0.01" name="units" class="validate">
+        <label for="units">Gallons: </label>
       </div>
 
       <div class="col s6 m4 input-field inline">
-        <input id="amount" type="number" step="0.01" name="amount" class="validate">
-        <label for="amount">Paid: </label>
+        <input id="cost" type="number" step="0.01" name="cost" class="validate">
+        <label for="cost">Total Cost: </label>
       </div>
 
       <input id="user_id" type="hidden" name="user_id" value="{{ users[0].id }}">
     </div>
+
+    <div class="row">
+      <div class="input-field col s12 m8 offset-m2">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="notes" name="notes" class="materialize-textarea"></textarea>
+        <label for="notes">Notes</label>
+      </div>
+    </div>
+
+
     <div class="row">
       <div class="col s6 offset-m2">
         <button type="submit" class="waves-effect waves-light btn-small">
-          <i class="large material-icons">add_circle_outline</i> 
+          <i class="large material-icons">add_circle_outline</i>
         </button>
       </div>
     </div>
@@ -58,29 +81,33 @@
       <table class="highlight responsive-table centered">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>location</th>
-            <th>user</th>
-            <th>ID</th>
-            <th>miles</th>
-            <th>gallons</th>
-            <th>price</th>
-            <th>fuel</th>
-            <th>Wex</th>
+            <th>Card No.</th>
+            <th>Department</th>
+            <th>Customer Vehicle ID</th>
+            <th>Driver</th>
+            <th>Transaction Date</th>
+            <th>Location</th>
+            <th>Merchant</th>
+            <th>Current Odometer</th>
+            <th>Product</th>
+            <th>Units</th>
+            <th>Fuel Cost</th>
           </tr>
         </thead>
         <tbody>
           {% for item in logs %}
           <tr>
-            <td>{{item.createdAt.toDateString()}}</td>
-            <td>{{item.location}}</td>
-            <td>{{item.user.firstName}}</td>
-            <td>{{item.user.employee}}</td>
-            <td>{{item.miles}}</td>
-            <td>{{item.amount}}</td>
-            <td>{{item.gallons}}</td>
-            <td>{{item.fuel_type}}</td>
-            <td>{{item.user.wex}}</td>
+              <td>{{item.user.card_number}}</td>
+              <td>{{item.user.department}}</td>
+              <td>{{item.vehicle_id}}</td>
+              <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+              <td>{{item.createdAt.toDateString()}}</td>
+              <td>{{item.location}}</td>
+              <td>{{item.merchant}}</td>
+              <td>{{item.odometer}}</td>
+              <td>{{item.product}}</td>
+              <td>{{item.units}} Gal</td>
+              <td>$ {{item.cost}}</td>
           </tr>
 
           {% endfor %}

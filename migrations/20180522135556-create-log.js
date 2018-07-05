@@ -16,20 +16,29 @@ module.exports = {
         },
         allowNull: false
       },
-      miles: {
+      odometer: {
         type: Sequelize.INTEGER
       },
-      gallons: {
+      units: {
         type: Sequelize.DECIMAL(5,2)
       },
-      fuel_type: {
+      product: {
         type: Sequelize.STRING
       },
-      amount: {
+      cost: {
         type: Sequelize.DECIMAL(6,2)
       },
       location: {
         type: Sequelize.STRING
+      },
+      vehicle_id: {
+        type: Sequelize.STRING
+      },
+      merchant: {
+        type: Sequelize.STRING
+      },
+      notes: {
+        type: Sequelize.TEXT
       },
       date: {
         type: Sequelize.DATE

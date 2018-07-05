@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employee: {
+      employee_no: {
         type: Sequelize.INTEGER
       },
       firstName: {
@@ -24,7 +24,10 @@ module.exports = {
       phone: {
         type: Sequelize.STRING
       },
-      wex: {
+      card_number: {
+        type: Sequelize.STRING
+      },
+      department: {
         type: Sequelize.STRING
       },
       passcrypt: {

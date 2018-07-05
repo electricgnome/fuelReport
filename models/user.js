@@ -4,13 +4,10 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
-   
     phone: DataTypes.STRING,
-   
-    employee: DataTypes.INTEGER,
-   
-    wex: DataTypes.STRING,
-  
+    employee_no: DataTypes.INTEGER,
+    card_number: DataTypes.STRING,
+    department: DataTypes.STRING,
     passcrypt: DataTypes.STRING(40106)
   }, {});
   user.associate = function(models) {

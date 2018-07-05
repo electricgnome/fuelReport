@@ -20,8 +20,8 @@
   <header id="header">
     <div class="navbar-fixed">
       <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Kappa Insurance</a>
+        <div class="nav-wrapper  blue-grey darken-3">
+          <a href="#" class="brand-logo">Fuel Report</a>
           <a href="#" data-target="slide-out" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
@@ -35,89 +35,84 @@
   <main id="content">
     <form action="/register" method="post">
       <div class="container">
-        <div class="row">
-          <div class="col s8 m4 offset-s5 offset-m4">
-            <div class="card  grey lighten-5 z-depth-4">
-              <div class="row">
-                <br>
-              </div>
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="fname" type="text" name="fname" class="validate" requeired>
-                    <label for="fname">first Name: </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="lname" type="text" name="lname" class="validate" requeired>
-                    <label for="lname">last Name: </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="email" type="email" name="email" class="validate" requeired>
-                    <label for="email">email: </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="phone" type="text" name="phone" class="validate" requeired>
-                    <label for="phone">Phone: </label>
-                  </div>
-                </div>
-              </div>
+        <div class="card  grey lighten-5 z-depth-4">
+          <div class="row">
+            <br>
+          </div>
+          <div class="row">
+            <div class="col s12 m4 offset-m2 input-field inline">
+              <input id="fname" type="text" name="fname" class="validate" requeired>
+              <label for="fname">first Name: </label>
+            </div>
 
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="empno" type="text" name="empno" class="validate" requeired>
-                    <label for="empno">Employee No.: </label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col  offset-s2">
-                  <div class="input-field inline ">
-                    <input id="wex" type="text" name="wex" class="validate" requeired>
-                    <label for="wex">Wex No.: </label>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="row">
-                <div class="col offset-s2">
-                  <div class="input-field inline  ">
-                    <input id="password" type="password" name="password" class="validate counter"  data-length="16" requeired>
-                    <label for="password">Password: </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col offset-s2">
-                  <div class="input-field inline  ">
-                    <input id="password2" type="password" name="password2" class="validate counter"  data-length="16" requeired>
-                    <label for="password2">Verify Password: </label>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col s12 offset-s2">
-                  <button type="submit" class="waves-effect waves-light btn-small">Login</button>
-                </div>
-              </div>
-              <div class="row"> </div>
+            <div class="col s12 m4  input-field inline ">
+              <input id="lname" type="text" name="lname" class="validate" requeired>
+              <label for="lname">last Name: </label>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col s12 m4 offset-m2 input-field inline">
+              <input id="email" type="email" name="email" class="validate" requeired>
+              <label for="email">email: </label>
+            </div>
+
+
+            <div class="col s12 m4  input-field inline ">
+              <input id="phone" type="text" name="phone" class="validate" requeired>
+              <label for="phone">Phone: </label>
+            </div>
+
+
+          </div>
+
+
+          <div class="row">
+            <div class="col s12 m4 offset-m2 input-field inline">
+              <input id="employee_no" type="text" name="employee_no" class="validate" requeired>
+              <label for="employee_no">Employee No.: </label>
+
+            </div>
+
+            <div class="col s12 m4  input-field inline ">
+              <input id="card_no" type="text" name="card_no" class="validate" requeired>
+              <label for="card_no">Wex No.: </label>
+            </div>
+
+
+          </div>
+
+          <div class="row">
+            <div class="col s12 m8 offset-m2 input-field inline">
+              <input id="department" type="text" name="department" class="validate" requeired>
+              <label for="department">Department: </label>
+            </div>
+
+          </div>
+
+
+          <div class="row">
+            <div class="col s12 m4 offset-m2 input-field inline">
+              <input id="password" type="password" name="password" class="validate counter" data-length="16" requeired>
+              <label for="password">Password: </label>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col s12 m4 offset-m2 input-field inline  ">
+              <input id="password2" type="password" name="password2" class="validate counter" data-length="16" requeired>
+              <label for="password2">Verify Password: </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col s12 offset-m2">
+              <button type="submit" class="waves-effect waves-light btn-small">Login</button>
+            </div>
+          </div>
+          <div class="row"> </div>
         </div>
+
+
       </div>
     </form>
   </main>
@@ -125,7 +120,7 @@
 
 
 
-  <footer class="page-footer hide-on-small-only">
+  <footer class="page-footer hide-on-small-only  blue-grey darken-3">
 
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
