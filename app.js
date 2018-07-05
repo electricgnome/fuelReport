@@ -158,8 +158,8 @@ app.post("/success", function (request, response, next) {
 
 
 app.get("/log", function(request, response) {
-  db.log.findAll({ include: [{ model: db.user }] }).then(logs => {
-    db.user.findAll({where:{employee:request.session.user}}).then(users=>{
+  db.user.findAll({where:{employee:request.session.user}}).then(users => {
+    db.log.findAll({ include: [{ model: db.user }], where:{ userId:users[0].id  } }).then(logs=>{
       console.log("current user ID: " + request.session.user )
       response.render("log_fuel.html", { logs, users});
     });
