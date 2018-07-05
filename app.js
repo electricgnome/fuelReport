@@ -117,7 +117,7 @@ app.post("/login", function(request, response, next) {
     if (username == user.employee_no && passhelper.matches(password, user.passcrypt)) {
       request.session.user = username;
       console.log("Welcome!");
-      response.render("index.html", {username});
+      response.redirect("/");
     } else {
       next();
       console.log("failed!");
