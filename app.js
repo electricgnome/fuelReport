@@ -277,6 +277,7 @@ app.get("/chat", function(request, response) {
   response.render("chat.html");
 });
 
-http.listen(8800, function() {
-  console.log("Listening on port 8800");
+var PORT = process.env.PORT || 8800;
+http.listen(PORT, function() {
+  console.log("Listening on port: " + PORT);
 });
