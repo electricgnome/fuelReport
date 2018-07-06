@@ -2,49 +2,71 @@
 
 <!-- <div class="container z-depth-5 table_display" style="margin-top:80px;"> -->
 <div class="container">
-<div class="row" style="padding-top:5%">
-  <div class="col s12 table_display ">
+  <div class="row" style="padding-top:5%">
+    <form action="/" method="post" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col s6">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" name="csvFile">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" name="csvFile">
+            </div>
+          </div>
 
-    <table class="highlight responsive-table centered">
-      <thead>
-        <tr>
-          <th>Card No.</th>
-          <th>Department</th>
-          <th>Customer Vehicle ID</th>
-          <th>Driver</th>
-          <th>Transaction Date</th>
-          <th>Location</th>          
-          <th>Merchant</th>
-          <th>Current Odometer</th>
-          <th>Product</th>
-          <th>Units</th>
-          <th>Fuel Cost</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in logs %}
-        <tr>
-          <td>{{item.user.card_number}}</td>
-          <td>{{item.user.department}}</td>
-          <td>{{item.vehicle_id}}</td>
-          <td>{{item.user.firstName}} {{item.user.lastName}}</td>
-          <td>{{item.createdAt.toDateString()}}</td>
-          <td>{{item.location}}</td>
-          <td>{{item.merchant}}</td>
-          <td>{{item.odometer}}</td>
-          <td>{{item.product}}</td>
-          <td>{{item.units}}</td>
-          <td>{{item.cost}}</td>
-        </tr>
+        </div>
+        <div class="col s2">
+          <button type="submit" class="waves-effect waves-light btn-small">
+           Import
+          </button>
+        </div>
+      </div>
 
-        {% endfor %}
+    </form>
+    <div class="col s12 table_display ">
+      <table class="highlight responsive-table centered">
+        <thead>
+          <tr>
+            <th>Card No.</th>
+            <th>Department</th>
+            <th>Customer Vehicle ID</th>
+            <th>Driver</th>
+            <th>Transaction Date</th>
+            <th>Location</th>
+            <th>Merchant</th>
+            <th>Current Odometer</th>
+            <th>Product</th>
+            <th>Units</th>
+            <th>Fuel Cost</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in logs %}
+          <tr>
+            <td>{{item.user.card_number}}</td>
+            <td>{{item.user.department}}</td>
+            <td>{{item.vehicle_id}}</td>
+            <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+            <td>{{item.createdAt.toDateString()}}</td>
+            <td>{{item.location}}</td>
+            <td>{{item.merchant}}</td>
+            <td>{{item.odometer}}</td>
+            <td>{{item.product}}</td>
+            <td>{{item.units}}</td>
+            <td>{{item.cost}}</td>
+          </tr>
+
+          {% endfor %}
 
 
-      </tbody>
-    </table>
+        </tbody>
+      </table>
 
-  </div></div>
+    </div>
+  </div>
   <!--  </div> -->
 
 
