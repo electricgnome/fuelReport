@@ -148,7 +148,8 @@ app.post("/", function(request, response, next) {
   var file = new formidable.IncomingForm();
   file.parse(request, function(err, fields, files) {
     var oldPath = files.csvFile.path;
-    console.log("files: " + files.csvFile.name + "")
+    // console.dir(files)
+    // console.dir(" path: "+ files.csvFile.path +"  name: " + files.csvFile.name)
     if (files.csvFile.name==''){
       response.redirect("/");
     }else{
