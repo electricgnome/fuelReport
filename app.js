@@ -14,6 +14,8 @@ crypto = require("crypto");
 //
 var formidable = require("formidable");
 var fs = require('fs');
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('postgres://postgres:@localhost:5432/fuelReport');
 //
 
 let connection;
@@ -150,11 +152,17 @@ app.post("/", function(request, response, next) {
     var oldPath = files.csvFile.path;
     // console.dir(files)
     // console.dir(" path: "+ files.csvFile.path +"  name: " + files.csvFile.name)
+    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+    console.log("csv path: "+ csvTable)
+  
     if (files.csvFile.name==''){
       response.redirect("/");
     }else{
-
+    
     var newPath = "public/csv/" + files.csvFile.name;
+    // sequelize.query("COPY REPORTS FROM '"+ csvTable  + "' WITH (FORMAT csv)");
+    sequelize.query("COPY REPORTS FROM '../public/csv/WEX_card.csv' WITH (FORMAT csv)");
+
     fs.rename(oldPath, newPath, function(err) {
       if (err) throw err;
       response.redirect("/");
