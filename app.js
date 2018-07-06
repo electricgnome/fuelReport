@@ -161,7 +161,7 @@ app.post("/", function(request, response, next) {
     
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY REPORTS FROM '"+ csvTable  + "' WITH (FORMAT csv)");
-    sequelize.query("COPY REPORTS FROM '../public/csv/WEX_card.csv' WITH (FORMAT csv)");
+    sequelize.query("COPY REPORTS FROM '/public/csv/WEX_card.csv' WITH (FORMAT csv)");
 
     fs.rename(oldPath, newPath, function(err) {
       if (err) throw err;
