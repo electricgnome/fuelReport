@@ -21,10 +21,9 @@
 
     <div class="row">
       <div class="col s6 m4 offset-m2 input-field inline">
-        <input id="merchant" type="text" name="merchant" class="validate">
+        <input id="merchant" type="text" name="merchant" class="validate autocomplete">
         <label for="merchant">Merchant: </label>
       </div>
-
 
 
       <div class="col s6 m4 input-field ">
@@ -81,14 +80,14 @@
       <table class="highlight responsive-table centered">
         <thead>
           <tr>
-            <th>Card No.</th>
-            <th>Department</th>
-            <th>Customer Vehicle ID</th>
-            <th>Driver</th>
+            <!-- <th>Card No.</th>
+            <th>Department</th> -->
+            <th>Vehicle ID</th>
+            <!-- <th>Driver</th> -->
             <th>Transaction Date</th>
-            <th>Location</th>
+            <!-- <th>Location</th> -->
             <th>Merchant</th>
-            <th>Current Odometer</th>
+            <th>Odometer</th>
             <th>Product</th>
             <th>Units</th>
             <th>Fuel Cost</th>
@@ -97,12 +96,12 @@
         <tbody>
           {% for item in logs %}
           <tr>
-              <td>{{item.user.card_number}}</td>
-              <td>{{item.user.department}}</td>
+              <!-- <td>{{item.user.card_number}}</td>
+              <td>{{item.user.department}}</td> -->
               <td>{{item.vehicle_id}}</td>
-              <td>{{item.user.firstName}} {{item.user.lastName}}</td>
+              <!-- <td>{{item.user.firstName}} {{item.user.lastName}}</td> -->
               <td>{{item.createdAt.toDateString()}}</td>
-              <td>{{item.location}}</td>
+              <!-- <td>{{item.location}}</td> -->
               <td>{{item.merchant}}</td>
               <td>{{item.odometer}}</td>
               <td>{{item.product}}</td>

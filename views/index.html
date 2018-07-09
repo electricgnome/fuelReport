@@ -4,6 +4,7 @@
 <div class="container">
   <div class="row" style="padding-top:5%">
     <form action="/" method="post" enctype="multipart/form-data">
+
       <div class="row">
         <div class="col s6">
           <div class="file-field input-field">
@@ -19,11 +20,25 @@
         </div>
         <div class="col s2">
           <button type="submit" class="waves-effect waves-light btn-small">
-           Import
+            Import
           </button>
         </div>
       </div>
 
+    </form>
+    <form action="/search" method="post" >
+      <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">search</i>
+            <input id="query" type="text" class="validate" name="query">
+            <label for="query">Search by Date</label>
+          </div>
+          <div class="col s2">
+              <button type="submit" class="waves-effect waves-light btn-small">
+                  <i class="material-icons prefix">search</i>
+              </button>
+            </div>
+      </div>
     </form>
     <div class="col s12 table_display ">
       <table class="highlight responsive-table centered">
@@ -31,12 +46,11 @@
           <tr>
             <th>Card No.</th>
             <th>Department</th>
-            <th>Customer Vehicle ID</th>
+            <th>Vehicle ID</th>
             <th>Driver</th>
             <th>Transaction Date</th>
-            <th>Location</th>
             <th>Merchant</th>
-            <th>Current Odometer</th>
+            <th>Odometer</th>
             <th>Product</th>
             <th>Units</th>
             <th>Fuel Cost</th>
@@ -44,14 +58,13 @@
           </tr>
         </thead>
         <tbody>
-          {% for item in logs %}
+          {% for item in reports %}
           <tr>
-            <td>{{item.user.card_number}}</td>
-            <td>{{item.user.department}}</td>
+            <td>{{item.card_number}}</td>
+            <td>{{item.department}}</td>
             <td>{{item.vehicle_id}}</td>
-            <td>{{item.user.firstName}} {{item.user.lastName}}</td>
-            <td>{{item.createdAt.toDateString()}}</td>
-            <td>{{item.location}}</td>
+            <td>{{item.driver}}</td>
+            <td>{{item.date}}</td>
             <td>{{item.merchant}}</td>
             <td>{{item.odometer}}</td>
             <td>{{item.product}}</td>

@@ -137,13 +137,21 @@ app.get("/logout", function(request, response) {
 //Todo APPl
 
 app.get("/", function(request, response) {
-  db.log.findAll({ include: [{ model: db.user }] }).then(logs => {
-    db.user.findAll().then(users => {
-      console.log("current user: " + request.session.user);
-      response.render("index.html", { logs, users });
-    });
+  // db.log.findAll({ include: [{ model: db.user }] }).then(logs => {
+  //   db.user.findAll().then(users => {
+  //     console.log("current user: " + request.session.user);
+  //     response.render("index.html", { logs, users });
+  //   });
+
+    db.report.findAll({
+      attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
+      order: ['date', 'driver']
+    }).then(reports => {
+    
+        response.render("index.html", { reports});
+      });
     // response.json({tasks: tasks})
-  });
+  // });
 });
 
 app.post("/", function(request, response, next) {
@@ -158,16 +166,28 @@ app.post("/", function(request, response, next) {
     if (files.csvFile.name==''){
       response.redirect("/");
     }else{
-    
+    var sysPath= "/home/gnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
-    // sequelize.query("COPY REPORTS FROM '"+ csvTable  + "' WITH (FORMAT csv)");
-    sequelize.query("COPY REPORTS FROM '/public/csv/WEX_card.csv' WITH (FORMAT csv)");
+    // sequelize.query("COPY REPORTS FROM '"+ sysPath + newPath  + "' DELIMITER ',' CSV HEADER");
+    sequelize.query("COPY REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
 
-    fs.rename(oldPath, newPath, function(err) {
-      if (err) throw err;
+    // fs.copyFile(oldPath, newPath, function(err) {
+    //   if (err) throw err;
       response.redirect("/");
-    });
+    // });
   }});
+});
+
+
+app.post("/search", function(request, response, next){
+  var query =new Date(request.body.query);
+  query = query.toDateString();
+  db.report.findAll({ 
+    attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
+    order: ['date', 'driver'],
+    where: {date:query} }).then(reports => {
+    response.render("index.html", {reports})
+  })
 });
 
 app.get("/report", function(request, response) {

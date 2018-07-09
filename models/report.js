@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     department:DataTypes.STRING,
     vehicle_id: DataTypes.STRING,
     driver: DataTypes.STRING,
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
     merchant: DataTypes.STRING,
     odometer: DataTypes.INTEGER,
     product: DataTypes.STRING,
