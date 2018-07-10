@@ -69,12 +69,38 @@
       </div>
     </div>
 
-
+  </form>
 
 
     <br>
 
     <div class="divider"></div>
+    <form action="/import" method="post" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="col s6">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" name="csvFile" required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" name="csvFile">
+            </div>
+          </div>
+
+        </div>
+        <div class="col s2">
+          <button type="submit" class="waves-effect waves-light btn-small">
+            Import
+          </button>
+        </div>
+      </div>
+
+    </form>
+    <div class="divider"></div>
+
+
 
     <div class="row">
       <table class="highlight responsive-table centered">
@@ -122,7 +148,7 @@
     <div class="row">
       <div class="col s10 "></div>
     </div>
-</form>
+
 </div>
 {% endblock %} {#
 <input type="hidden" value="{{item.id}}" name="id" />

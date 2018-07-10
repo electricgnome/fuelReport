@@ -166,7 +166,7 @@ app.post("/", function(request, response, next) {
     if (files.csvFile.name==''){
       response.redirect("/");
     }else{
-    var sysPath= "/home/gnome/projects/fuelReport/"
+    var sysPath= "/home/electricgnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY REPORTS FROM '"+ sysPath + newPath  + "' DELIMITER ',' CSV HEADER");
     sequelize.query("COPY REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
@@ -175,6 +175,27 @@ app.post("/", function(request, response, next) {
     //   if (err) throw err;
       response.redirect("/");
     // });
+  }});
+});
+
+
+
+app.post("/import", function(request, response, next) {
+  var file = new formidable.IncomingForm();
+  file.parse(request, function(err, fields, files) {
+    var oldPath = files.csvFile.path;
+    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+    console.log("csv path: "+ csvTable)
+  
+    if (files.csvFile.name==''){
+      response.redirect("/log");
+    }else{
+    var sysPath= "/home/electricgnome/projects/fuelReport/"
+    var newPath = "public/csv/" + files.csvFile.name;
+  
+    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt"'+ ", "+ '"updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+      response.redirect("/log");
+ 
   }});
 });
 
