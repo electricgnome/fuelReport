@@ -26,22 +26,62 @@
       </div>
 
     </form>
+
+
+
     <form action="/search" method="post" >
       <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col s2">
             <i class="material-icons prefix">search</i>
-            <input id="query" type="text" class="validate" name="query" required>
-            <label for="query">Search by Date</label>
+            <input id="dateRange" type="text" class="datepicker validate" name="dateRange" >
+            <label for="dateRange">Search by Date</label>
           </div>
+          <div class="input-field col s2">
+              <p class="range-field"> Day range:
+                  <input type="range" name="days" id="days" min="0" max="8" />
+                </p>
+          </div>
+
+          <div class="input-field col s2">
+              <select name="option">
+                <option value="driver" selected>ALL</option>
+                <option value="vehicle_id">Vehicle</option>
+                <option value="driver">Driver</option>
+                <option value="odometer">Odometer</option>
+              </select>
+              <label>Choose options:</label>
+            </div>
+
+          <div class="input-field col s2">
+              <input id="query" type="text" class="validate" name="query" >
+              <label for="query">Vehicle, Driver, Odometer</label>
+            </div>
+         
           <div class="col s2">
               <button type="submit" class="waves-effect waves-light btn-small">
                   <i class="material-icons prefix">search</i>
               </button>
             </div>
       </div>
+      <div class="row">
+      
+
+      </div>
     </form>
+
+
+
+
+
+
+
+
+
     <div class="col s12 table_display ">
-      <table class="highlight responsive-table centered">
+      <div class="right-align" >
+        <h5 id = "totals"></h5>
+      </div>
+      <table id="searchTable" class="highlight responsive-table centered">
         <thead>
           <tr>
             <th>Card No.</th>

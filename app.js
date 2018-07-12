@@ -15,6 +15,7 @@ crypto = require("crypto");
 var formidable = require("formidable");
 var fs = require('fs');
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize('postgres://postgres:@localhost:5432/fuelReport');
 //
 
@@ -145,7 +146,7 @@ app.get("/", function(request, response) {
 
     db.report.findAll({
       attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
-      order: ['date', 'driver']
+      order: ['date', 'department', 'driver']
     }).then(reports => {
     
         response.render("index.html", { reports});
@@ -180,33 +181,49 @@ app.post("/", function(request, response, next) {
 
 
 
-app.post("/import", function(request, response, next) {
-  var file = new formidable.IncomingForm();
-  file.parse(request, function(err, fields, files) {
-    var oldPath = files.csvFile.path;
-    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
-    console.log("csv path: "+ csvTable)
+// app.post("/import", function(request, response, next) {
+//   var file = new formidable.IncomingForm();
+//   file.parse(request, function(err, fields, files) {
+//     var oldPath = files.csvFile.path;
+//     var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+//     console.log("csv path: "+ csvTable)
   
-    if (files.csvFile.name==''){
-      response.redirect("/log");
-    }else{
-    var sysPath= "/home/electricgnome/projects/fuelReport/"
-    var newPath = "public/csv/" + files.csvFile.name;
+//     if (files.csvFile.name==''){
+//       response.redirect("/log");
+//     }else{
+//     var sysPath= "/home/electricgnome/projects/fuelReport/"
+//     var newPath = "public/csv/" + files.csvFile.name;
   
-    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt"'+ ", "+ '"updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
-      response.redirect("/log");
+//     sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt"'+ ", "+ '"updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+//       response.redirect("/log");
  
-  }});
-});
+//   }});
+// });
 
 
 app.post("/search", function(request, response, next){
-  var query =new Date(request.body.query);
-  query = query.toDateString();
+  console.table([{dateRange: request.body.dateRange}]);
+  var dateRange =((request.body.dateRange == '') ? new Date('01/01/2017') : new Date(request.body.dateRange))
+  var days = parseInt(request.body.days);
+  var dayRange =((request.body.dateRange == '') ?new Date('01/01/2100'): new Date(dateRange.getFullYear(), dateRange.getMonth(), dateRange.getDate()+ days))
+  var option = request.body.option;
+ 
+  var query = ((typeof request.body.query ==='string') ? request.body.query.toUpperCase() : request.body.query);
+  var query = ((request.body.query =='') ? {[sequelize.Op.notLike]:"a"} :  request.body.query );
+
+  console.table([{dateRange: dateRange, days: days, dayRange:dayRange, query: query }])
+
+
   db.report.findAll({ 
     attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
-    order: ['date', 'driver'],
-    where: {date:query} }).then(reports => {
+    order: ['date', 'department','driver'],
+    where: {
+      date:{
+        [sequelize.Op.gte]: dateRange, 
+        [sequelize.Op.lte]: dayRange
+      },
+      [option]:query
+    }}).then(reports => {
     response.render("index.html", {reports})
   })
 });

@@ -56,7 +56,7 @@ function materialize() {
   });
 
   $(".datepicker").datepicker({
-    format: "yyyy-mm-dd",
+    format: "yyyy/mm/dd",
     yearRange: 90
   });
   $("select").formSelect();
@@ -101,5 +101,6 @@ function materialize() {
 $(window).on("load", function() {
   materialize();
   $(".collapsible").collapsible();
-
+ var res = document.getElementById("searchTable").rows.length -1
+  document.getElementById("totals").innerHTML = "total entries found:" + res;
 });
