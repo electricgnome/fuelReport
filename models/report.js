@@ -14,6 +14,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   report.associate = function(models) {
 //     report.belongsTo(models.user);// associations can be defined here
+  report.belongsTo(models.log, {foreignKey: 'odometer', targetKey: 'odometer'})
+
   };
   return report;
 };

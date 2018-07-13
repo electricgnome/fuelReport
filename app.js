@@ -209,28 +209,31 @@ app.post("/search", function(request, response, next){
   var days = parseInt(request.body.days);
   var dayRange =((request.body.dateRange == '') ?new Date('01/01/2100'): new Date(dateRange.getFullYear(), dateRange.getMonth(), dateRange.getDate()+ days))
   var option = request.body.option;
- 
   var query = ((typeof request.body.query ==='string') ? request.body.query.toUpperCase() : request.body.query);
   var query = ((request.body.query =='') ? {[sequelize.Op.notLike]:"a"} :  request.body.query );
 
+
+ 
   console.table([{dateRange: dateRange, days: days, dayRange:dayRange, query: query }])
 
-sequelize.query("SELECT reports.date, reports.department, reports.card_number, reports.vehicle_id, reports.driver, reports.odometer AS odometer_reported, logs.odometer AS odometer_logged, logs.units, reports.cost AS cost_reported, logs.cost AS cost_logged FROM reports INNER JOIN logs ON logs.odometer = reports.odometer ORDER BY reports.date, reports.department, reports.driver").then(reports => {
-  // db.report.findAll({ 
-  //   include: [ {model:db.log, as: 'logs', attributes:['odometer', 'units', 'cost'], requiered: true}],
-  //   attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
-  //   order: ['date', 'department','driver'],
-  //   where: {
-  //     date:{
-  //       [sequelize.Op.gte]: dateRange, 
-  //       [sequelize.Op.lte]: dayRange
-  //     },
-  //     [option]:query
-  //   }}).then(reports => {
-    console.dir(JSON.stringify(reports))
+// sequelize.query("SELECT reports.date, reports.department, reports.card_number, reports.vehicle_id, reports.driver, reports.odometer AS odometer_reported, logs.odometer AS odometer_logged, logs.units, reports.cost AS cost_reported, logs.cost AS cost_logged FROM reports INNER JOIN logs ON logs.odometer = reports.odometer ORDER BY reports.date, reports.department, reports.driver").then(reports => {
+  db.report.findAll({ 
+    include: [ {model:db.log,attributes:['odometer', 'units', 'cost'], requiered: true}],
+   
+
+    attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
+    order: ['date', 'department','driver'],
+    where: {
+      date:{
+        [sequelize.Op.gte]: dateRange, 
+        [sequelize.Op.lte]: dayRange
+      },
+      [option]:query
+    }}).then(reports => {
+   
     response.render("index.html", {reports})
   })
-});
+}); 
 
 app.get("/report", function(request, response) {
   response.render("report.html");
