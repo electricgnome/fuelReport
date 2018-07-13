@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     vehicle_id: DataTypes.STRING,
     merchant: DataTypes.STRING,
     notes: DataTypes.TEXT,
-    date: DataTypes.DATE,
+    date: DataTypes.DATEONLY,
     location: DataTypes.STRING
   }, {});
   log.associate = function(models) {

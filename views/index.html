@@ -94,14 +94,26 @@
             <th>Transaction Date</th>
             <th>Merchant</th>
             <th>Report Odometer</th>
-            <th>Log Odometer</th>
+            <th>Logged Odometer</th>
             <th>Product</th>
             <th>Units</th>
+            <th>Report Fuel Cost</th>
+            <th>logged Fuel Cost</th>
+            <th>LOG TABLE</th>
+            <th>Card No.</th>
+            <th>Department</th>
+            <th>Vehicle ID</th>
+            <th>Driver</th>
+            <th>Transaction Date</th>
+            <th>Merchant</th>
+            <th>Odometer</th>          
+            <th>Product</th>
+            <th>Units</th>           
             <th>Fuel Cost</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
+          {% set count = 0 %}
           {% for item in reports %}
           <tr>
             <td>{{item.card_number}}</td>
@@ -111,10 +123,32 @@
             <td>{{item.date}}</td>
             <td>{{item.merchant}}</td>
             <td>{{item.odometer}}</td>
-            <td>{{item.log.odometer}}</td>
+            {% if item.odometer != item.log.odometer %}
+            <td style="background-color: red">{{item.log.odometer}}</td>
+            {% else %}
+            <td style="background-color: blue">{{item.log.odometer}}</td>
+            {% endif %}
             <td>{{item.product}}</td>
             <td>{{item.units}}</td>
-            <td>{{item.cost}}</td>
+            {% if item.cost != item.log.cost %}
+            <td style="background-color: red">{{item.log.cost}}</td>
+            {% set count = count +1 %}
+            {% else %}
+            <td style="background-color: blue">{{item.log.cost}}</td>
+            {% endif %}
+          
+            <td></td>
+            <td>{{item.log.card_number}}</td>
+            <td>{{item.log.department}}</td>
+            <td>{{item.log.vehicle_id}}</td>
+            <td>{{item.log.driver}}</td>
+            <td>{{item.log.date}}</td>
+            <td>{{item.log.merchant}}</td>           
+            <td>{{item.log.odometer}}</td>
+            <td>{{item.log.product}}</td>
+            <td>{{item.log.units}}</td>
+            <td>{{item.log.cost}}</td>
+           
           </tr>
 
           {% endfor %}
@@ -122,7 +156,7 @@
 
         </tbody>
       </table>
-
+      errors: {{count}}
     </div>
   </div>
   <!--  </div> -->

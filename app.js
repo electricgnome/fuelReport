@@ -191,12 +191,12 @@ app.post("/import", function(request, response, next) {
     if (files.csvFile.name==''){
       response.redirect("/log");
     }else{
-    var sysPath="/home/gnome/projects/fuelReport/"
-    // var sysPath= "/home/electricgnome/projects/fuelReport/"
+    // var sysPath="/home/gnome/projects/fuelReport/"
+    var sysPath= "/home/electricgnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
   
-    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
       response.redirect("/log");
  
   }});
@@ -209,18 +209,12 @@ app.post("/search", function(request, response, next){
   var days = parseInt(request.body.days);
   var dayRange =((request.body.dateRange == '') ?new Date('01/01/2100'): new Date(dateRange.getFullYear(), dateRange.getMonth(), dateRange.getDate()+ days))
   var option = request.body.option;
-  var query = ((typeof request.body.query ==='string') ? request.body.query.toUpperCase() : request.body.query);
-  var query = ((request.body.query =='') ? {[sequelize.Op.notLike]:"a"} :  request.body.query );
-
-
+  var query = ((request.body.query =='') ? {[sequelize.Op.notLike]:"a"} :  (typeof request.body.query ==='string') ? request.body.query.toUpperCase() : request.body.query );
  
   console.table([{dateRange: dateRange, days: days, dayRange:dayRange, query: query }])
 
-// sequelize.query("SELECT reports.date, reports.department, reports.card_number, reports.vehicle_id, reports.driver, reports.odometer AS odometer_reported, logs.odometer AS odometer_logged, logs.units, reports.cost AS cost_reported, logs.cost AS cost_logged FROM reports INNER JOIN logs ON logs.odometer = reports.odometer ORDER BY reports.date, reports.department, reports.driver").then(reports => {
   db.report.findAll({ 
-    include: [ {model:db.log,attributes:['odometer', 'units', 'cost'], requiered: true}],
-   
-
+    include: [ {model:db.log,attributes:['vehicle_id', 'date', 'merchant','odometer', 'units', 'cost'], requiered: true}],
     attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
     order: ['date', 'department','driver'],
     where: {
@@ -230,7 +224,6 @@ app.post("/search", function(request, response, next){
       },
       [option]:query
     }}).then(reports => {
-   
     response.render("index.html", {reports})
   })
 }); 
