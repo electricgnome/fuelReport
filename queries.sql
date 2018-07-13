@@ -22,5 +22,16 @@
 
 -- TRUNCATE TABLE logs
 
--- SELECT reports.date, reports.department, reports.card_number, reports.vehicle_id, reports.driver, reports.odometer AS "odometer reported", logs.odometer AS "odometer logged",  logs.units, reports.cost AS "cost reported", logs.cost AS "cost logged" 
--- FROM reports INNER JOIN logs ON logs.odometer = reports.odometer order by reports.date, reports.department, reports.driver
+SELECT
+    reports.date, 
+    reports.department,    
+    reports.card_number, 
+    reports.vehicle_id, 
+    reports.driver, 
+    reports.odometer AS "odometer reported", 
+    logs.odometer AS "odometer logged",  
+    logs.units, 
+    reports.cost AS "cost reported", 
+    logs.cost AS "cost logged" 
+FROM reports INNER JOIN logs ON logs.odometer = reports.odometer 
+ORDER BY reports.date, reports.department, reports.driver

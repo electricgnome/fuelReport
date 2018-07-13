@@ -143,8 +143,8 @@ app.get("/", function(request, response) {
   //     console.log("current user: " + request.session.user);
   //     response.render("index.html", { logs, users });
   //   });
-
     db.report.findAll({
+     
       attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
       order: ['date', 'department', 'driver']
     }).then(reports => {
@@ -181,24 +181,26 @@ app.post("/", function(request, response, next) {
 
 
 
-// app.post("/import", function(request, response, next) {
-//   var file = new formidable.IncomingForm();
-//   file.parse(request, function(err, fields, files) {
-//     var oldPath = files.csvFile.path;
-//     var csvTable = files.csvFile.path + "/" + files.csvFile.name;
-//     console.log("csv path: "+ csvTable)
+app.post("/import", function(request, response, next) {
+  var file = new formidable.IncomingForm();
+  file.parse(request, function(err, fields, files) {
+    var oldPath = files.csvFile.path;
+    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+    console.log("csv path: "+ csvTable)
   
-//     if (files.csvFile.name==''){
-//       response.redirect("/log");
-//     }else{
-//     var sysPath= "/home/electricgnome/projects/fuelReport/"
-//     var newPath = "public/csv/" + files.csvFile.name;
+    if (files.csvFile.name==''){
+      response.redirect("/log");
+    }else{
+    var sysPath="/home/gnome/projects/fuelReport/"
+    // var sysPath= "/home/electricgnome/projects/fuelReport/"
+    var newPath = "public/csv/" + files.csvFile.name;
+    // sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
   
-//     sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt"'+ ", "+ '"updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
-//       response.redirect("/log");
+    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+      response.redirect("/log");
  
-//   }});
-// });
+  }});
+});
 
 
 app.post("/search", function(request, response, next){
@@ -213,17 +215,19 @@ app.post("/search", function(request, response, next){
 
   console.table([{dateRange: dateRange, days: days, dayRange:dayRange, query: query }])
 
-
-  db.report.findAll({ 
-    attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
-    order: ['date', 'department','driver'],
-    where: {
-      date:{
-        [sequelize.Op.gte]: dateRange, 
-        [sequelize.Op.lte]: dayRange
-      },
-      [option]:query
-    }}).then(reports => {
+sequelize.query("SELECT reports.date, reports.department, reports.card_number, reports.vehicle_id, reports.driver, reports.odometer AS odometer_reported, logs.odometer AS odometer_logged, logs.units, reports.cost AS cost_reported, logs.cost AS cost_logged FROM reports INNER JOIN logs ON logs.odometer = reports.odometer ORDER BY reports.date, reports.department, reports.driver").then(reports => {
+  // db.report.findAll({ 
+  //   include: [ {model:db.log, as: 'logs', attributes:['odometer', 'units', 'cost'], requiered: true}],
+  //   attributes: ['id','card_number', 'department', 'vehicle_id', 'driver', 'date', 'merchant', 'odometer', 'product', 'units', 'cost' ],
+  //   order: ['date', 'department','driver'],
+  //   where: {
+  //     date:{
+  //       [sequelize.Op.gte]: dateRange, 
+  //       [sequelize.Op.lte]: dayRange
+  //     },
+  //     [option]:query
+  //   }}).then(reports => {
+    console.dir(JSON.stringify(reports))
     response.render("index.html", {reports})
   })
 });
