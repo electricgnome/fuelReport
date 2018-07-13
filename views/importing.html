@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+
+<div class="row"></div>
+
+
+
+    <form action="/import_users" method="post" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="col s6">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" name="csvFile" required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" name="csvFile">
+            </div>
+          </div>
+
+        </div>
+        <div class="col s2">
+          <button type="submit" class="waves-effect waves-light btn-small">
+            Import users
+          </button>
+        </div>
+      </div>
+
+    </form>
+    <div class="divider"></div>
+
+    <form action="/import_logs" method="post" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="col s6">
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" name="csvFile" required>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" name="csvFile">
+            </div>
+          </div>
+
+        </div>
+        <div class="col s2">
+          <button type="submit" class="waves-effect waves-light btn-small">
+            Import logs
+          </button>
+        </div>
+      </div>
+
+    </form>
+</div>
+
+    {% endblock %} 

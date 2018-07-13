@@ -181,7 +181,11 @@ app.post("/", function(request, response, next) {
 
 
 
-app.post("/import", function(request, response, next) {
+app.get("/import", function(request, response) {
+  response.render("importing.html")
+});
+
+app.post("/import_logs", function(request, response, next) {
   var file = new formidable.IncomingForm();
   file.parse(request, function(err, fields, files) {
     var oldPath = files.csvFile.path;
@@ -197,6 +201,27 @@ app.post("/import", function(request, response, next) {
     // sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
   
     sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+      response.redirect("/log");
+ 
+  }});
+});
+
+app.post("/import_users", function(request, response, next) {
+  var file = new formidable.IncomingForm();
+  file.parse(request, function(err, fields, files) {
+    var oldPath = files.csvFile.path;
+    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+    console.log("csv path: "+ csvTable)
+  
+    if (files.csvFile.name==''){
+      response.redirect("/log");
+    }else{
+    // var sysPath="/home/gnome/projects/fuelReport/"
+    var sysPath= "/home/electricgnome/projects/fuelReport/"
+    var newPath = "public/csv/" + files.csvFile.name;
+    sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+  
+    // sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
       response.redirect("/log");
  
   }});
