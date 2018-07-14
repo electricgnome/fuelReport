@@ -16,8 +16,8 @@ var formidable = require("formidable");
 var fs = require('fs');
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('postgres://postgres:@localhost:5432/fuelReport');
-//
+// const sequelize = new Sequelize('postgres://postgres:@localhost:5432/fuelReport');
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 let connection;
 
