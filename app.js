@@ -170,7 +170,7 @@ app.post("/", function(request, response, next) {
     var sysPath= "/home/electricgnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY REPORTS FROM '"+ sysPath + newPath  + "' DELIMITER ',' CSV HEADER");
-    sequelize.query("COPY REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+    sequelize.query("COPY REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ csvTable + "'  DELIMITER ',' CSV HEADER");
 
     // fs.copyFile(oldPath, newPath, function(err) {
     //   if (err) throw err;
@@ -196,11 +196,11 @@ app.post("/import_logs", function(request, response, next) {
       response.redirect("/log");
     }else{
     // var sysPath="/home/gnome/projects/fuelReport/"
-    var sysPath= "/home/electricgnome/projects/fuelReport/"
-    var newPath = "public/csv/" + files.csvFile.name;
+    // var sysPath= "/home/electricgnome/projects/fuelReport/"
+    // var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
   
-    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+    sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ csvTable + "'  DELIMITER ',' CSV HEADER");
       response.redirect("/log");
  
   }});
@@ -219,7 +219,7 @@ app.post("/import_users", function(request, response, next) {
     // var sysPath="/home/gnome/projects/fuelReport/"
     var sysPath= "/home/electricgnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
-    sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
+    sequelize.query("COPY USERS(employee_no, "+ '"firstName", "lastName"'+", email, phone, card_number, department, " + '"createdAt", "updatedAt"'+") FROM '"+ csvTable  + "'  DELIMITER ',' CSV HEADER");
   
     // sequelize.query("COPY LOGS(" + '"userId"' + ", odometer, units, product, cost, vehicle_id, merchant, date," + '"createdAt", "updatedAt"'+") FROM '"+ sysPath + newPath  + "'  DELIMITER ',' CSV HEADER");
       response.redirect("/log");
