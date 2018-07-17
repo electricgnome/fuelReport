@@ -1,4 +1,4 @@
-Card Number,Department,Customer Vehicle ID,Driver Name,Trans Date,Merchant,Current Odometer,Product,Units,Fuel Cost
+Card Number,Department,Customer Vehicle ID,Driver Name,Date,Merchant,Current Odometer,Product,Units,Cost
 0121 - 1,ALICE,A HERBERT 392,HERBERT,6/22/2018,DIAMOND,219289,SUP,26.236,76.06 
 0121 - 1,ALICE,A HERBERT 392,HERBERT,6/20/2018,SUNOCO,218969,UNL,21.457,55.77 
 0121 - 1,ALICE,A HERBERT 392,HERBERT,6/19/2018,DIAMOND,218681,UNL,23.039,59.42 

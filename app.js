@@ -161,7 +161,7 @@ app.post("/", function(request, response, next) {
     var oldPath = files.csvFile.path;
     // console.dir(files)
     // console.dir(" path: "+ files.csvFile.path +"  name: " + files.csvFile.name)
-    var csvTable = files.csvFile.path + "/" + files.csvFile.name;
+    var csvTable = files.csvFile.path + "/" + files.csvFile.name; //for use in heroku 
     console.log("csv path: "+ csvTable)
   
     if (files.csvFile.name==''){
@@ -170,7 +170,8 @@ app.post("/", function(request, response, next) {
     var sysPath= "/home/electricgnome/projects/fuelReport/"
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY REPORTS FROM '"+ sysPath + newPath  + "' DELIMITER ',' CSV HEADER");
-    sequelize.query("\COPY REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ csvTable + "'  DELIMITER ',' CSV HEADER");
+      
+    sequelize.query("\copy REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ sysPath + newPath + "' DELIMITER ',' CSV HEADER");
 
     // fs.copyFile(oldPath, newPath, function(err) {
     //   if (err) throw err;
