@@ -171,7 +171,7 @@ app.post("/", function(request, response, next) {
     var newPath = "public/csv/" + files.csvFile.name;
     // sequelize.query("COPY REPORTS FROM '"+ sysPath + newPath  + "' DELIMITER ',' CSV HEADER");
       
-    sequelize.query("\copy REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ sysPath + newPath + "' DELIMITER ',' CSV HEADER");
+    sequelize.query("\copy REPORTS(card_number, department, vehicle_id, driver, date, merchant, odometer, product, units, cost) FROM '"+ csvTable + "' DELIMITER ',' CSV HEADER");
 
     // fs.copyFile(oldPath, newPath, function(err) {
     //   if (err) throw err;
