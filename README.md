@@ -1,19 +1,20 @@
-# fuelReport
+# Fuel Report [![Build Status](https://travis-ci.org/electricgnome/fuelReport.svg?branch=master)](https://travis-ci.org/electricgnome/fuelReport) <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
 
-This app helps customers track their vehicle fleet's internal fuel reporting, and reconciles any differences with the credit card company's weekly statement. 
+This app helps customers track their vehicle fleet's internal fuel reporting, and reconciles any differences with the credit card company's weekly statement.
 
-built on Node/express, PSQL/Sequelize ORM, and materialize CSS. 
+## Technologies Used
+
+built on Node/express, PSQL/Sequelize ORM, and materialize CSS.
+
+## Development Setup
 
 to get this app running in a local environment:
 
-* clone git
+```sh
+npm init
+sequelize db:create
+sequelize db:migrate
+npm app.js
+```
 
-* `npm init`
-
-* `sequelize db:create`
-
-* `sequelize db:migrate`
-
-* `npm app.js`
-
-* goto: `localhost:8800/register`
+Then visit: `localhost:8800/register`
