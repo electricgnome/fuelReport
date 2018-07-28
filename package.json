@@ -46,6 +46,6 @@
     "standard": "10.0.3"
   },
   "scripts": {
-    "test": "./node_modules/.bin/standard app.js && ./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/standard test/test.js && ./node_modules/.bin/mocha"
   }
 }
